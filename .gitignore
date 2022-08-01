@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+TL_SCCO_CTPRVN.json
+*.docs
+TL_SCCO_CTPRVN.ts
