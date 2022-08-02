@@ -1,24 +1,24 @@
 import React, { useState } from 'react'
-import Naver from './components/map/Naver'
-import Kakao from './components/map/Kakao'
+import { Link } from 'react-router-dom'
+import Router from './routes/Router'
+import Entry from './components/Entry'
 import TheHeader from './components/TheHeader'
 import TheFooter from './components/TheFooter'
-import Router from '../src/routes/Router'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="App ">
-      <TheHeader />
-      <Router />
+    <>
+      <div className="bg-[url('/beautiful-tropical-empty-beach-sea-ocean-with-white-cloud-on-blue-sky-background_74190-13665.webp')] bg-no-repeat bg-cover">
+        <TheHeader />
+        <Router />
+      </div>
       <TheFooter />
-    </div>
+    </>
   )
 }
 
 export default App
-
 {
-  /* <Naver x={1} y={2}  props로 내려줄 위도 경도  /> */
 }

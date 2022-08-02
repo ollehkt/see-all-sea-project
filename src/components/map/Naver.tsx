@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 interface PropsType {
   x: number
@@ -7,6 +7,11 @@ interface PropsType {
 
 const Naver = ({ x, y }: PropsType /* props로 내려 받을 위도 경도 */) => {
   useEffect(() => {
+    const script = document.createElement('script')
+    script.src =
+      'dapi.kakao.com/v2/maps/sdk.js?appkey=27ca445596778f57efa825a1e6f30912&libraries=services&autoload=false'
+    document.head.appendChild(script)
+
     let map = null
     let marker = null
     const initMap = () => {
@@ -25,6 +30,7 @@ const Naver = ({ x, y }: PropsType /* props로 내려 받을 위도 경도 */) =
       })
     }
     initMap()
+    return () => script.remove()
   }, [])
   return <div id="map" className="w-[500px] h-[500px]"></div>
 }
