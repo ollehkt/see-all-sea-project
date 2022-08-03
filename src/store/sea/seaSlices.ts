@@ -11,30 +11,34 @@ const getSeaInfo = createAsyncThunk('seaSlice/getseaInfo', async () => {
   const res = await axios(`${API}SIDO_NM=경기&${API_KEY}`)
   console.log(res)
   return res
-}
-)
+})
 
 interface InitialState {
-  info: []
-  status: string
+  info?: []
+  status?: string
+  item?: []
 }
 
 const seaInitialState: InitialState = {
   info: [],
-  status:''
+  status: '',
+  item: [],
 }
 
 const seaSlice = createSlice({
   name: 'sea',
   initialState: seaInitialState,
   reducers: {
-    selectArea() {},
+    selectArea(state, action) {
+      state.item = action.payload.item
+    },
   },
-  extraReducers: (builder) => {
-    builder.addcase(getSeaInfo.pending,(state,action) => {
-      state.
-    })
-  },
+  // extraReducers: (builder) => {
+  //   builder.addcase(getSeaInfo.pending,(state,action) => {
+  //     state.
+  //   })
+  // },
 })
 
 export const seaReducer = seaSlice.reducer
+export const seaActions = seaSlice.actions

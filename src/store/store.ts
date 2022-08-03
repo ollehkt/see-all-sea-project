@@ -1,7 +1,5 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
-import { TypedUseSelectorHook } from 'react-redux'
+import { configureStore } from '@reduxjs/toolkit'
+import { useSelector, useDispatch, TypedUseSelectorHook } from 'react-redux'
 import { seaReducer } from './sea/seaSlices'
 
 export const store = configureStore({
