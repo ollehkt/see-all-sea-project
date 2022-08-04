@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { useAppDispatch } from './../store/store'
-import { seaActions } from './../store/sea/seaSlices'
+import { useAppDispatch } from '../../store/store'
+import { seaActions } from '../../store/sea/seaSlices'
 
 interface PropsType {
   name: string

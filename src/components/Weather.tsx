@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useSeaSelector } from '../../store/store'
+import { useStoreSelector } from '../store/store'
 import axios from 'axios'
 
 function Weather() {
-  const { item } = useSeaSelector((state) => state.sea)
+  const { item } = useStoreSelector((state) => state.sea)
   console.log(item)
   const filteredItem = item?.map((i) => {
     return { lat: i.lat, lon: i.lon }

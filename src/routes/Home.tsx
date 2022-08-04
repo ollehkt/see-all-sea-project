@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import Button from '../utils/Button'
+import Button from '../components/common/Button'
 import axios from 'axios'
 import Naver from '../components/map/Naver'
-import Kakao from '../components/map/Kakao'
 import TheHeader from '../components/TheHeader'
 import TheFooter from '../components/TheFooter'
 import Router from './Router'
-
+import WeatherPrac from '../components/weatherpractice/WeatherPrac'
+import { useStoreSelector } from '../store/store'
 const Home = () => {
+  const { weather } = useStoreSelector((state) => state.weather)
+  console.log(weather)
   return (
     <>
       <div className="flex flex-wrap justify-center items-center gap-2 h-[700px]">

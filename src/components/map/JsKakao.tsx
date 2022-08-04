@@ -28,7 +28,7 @@ const positions = [
 ]
 
 // const { kakao } = window
-const Kakao = ({ name }: PropsTypes) => {
+const JsKakao = ({ name }: PropsTypes) => {
   const mapRef = useRef<HTMLDivElement>(null)
   const [markerList, setMarkerList] = useState<any[]>([])
   const [info, setInfo] = useState()
@@ -149,4 +149,4 @@ const Kakao = ({ name }: PropsTypes) => {
   )
 }
 
-export default Kakao
+export default JsKakao
