@@ -7,24 +7,25 @@ import TheFooter from '../components/TheFooter'
 import Router from './Router'
 import WeatherPrac from '../components/weatherpractice/WeatherPrac'
 import { useStoreSelector } from '../store/store'
+import { Link, NavLink, Outlet } from 'react-router-dom'
+import ReactKakaoMap from '../components/map/ReactKakaoMap'
+import { Carousel } from 'flowbite-react'
+const area = ['강원', '경기', '충북', '충남', '경남', '경북', '전남', '전북', '제주']
 const Home = () => {
   const { weather } = useStoreSelector((state) => state.weather)
   console.log(weather)
   return (
     <>
-      <div className="flex flex-wrap justify-center items-center gap-2 h-[700px]">
-        <Button name="강원" value="kangwon" />
-        <Button name="경기" value="Kyunggi" />
-        <Button name="충북" value="chungcheongnam" />
-        <Button name="충남" value="chungcheongnam" />
-        <Button name="경남" value="Kyungsangnam" />
-        <Button name="경북" value="Kyungsangbuk" />
-        <Button name="전남" value="Jeollanam" />
-        <Button name="전북" value="Jeollabuk" />
+      <div className=" h-[450px] container mx-auto px-6 md:px-12 relative z-10 flex items-center py-32 xl:py-40">
+        <div className="lg:w-3/5 xl:w-2/5 flex flex-col items-start relative z-10">
+          <h1 className="font-bold text-6xl sm:text-6xl text-white leading-3 line">
+            눈으로 보는 모든 바다
+            <br />
+            안전해
+          </h1>
+        </div>
       </div>
-      <span>click</span>
-
-      {/* <div className="w-[500px] h-[500px] mx-auto border-2 border-black border-solid rounded-full z-9999"></div> */}
+      {/* <Outlet /> */}
     </>
   )
 }

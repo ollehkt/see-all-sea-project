@@ -1,16 +1,16 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from './Home'
-import Kangwon from './Kangwon'
-import Entry from './../components/Entry'
+import Area from './Area'
+
 import About from './About'
 const Router = () => {
   return (
     <Routes>
-      <Route path="/" element={<Entry />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/:area" element={<Kangwon />} />
+      <Route path="/" element={<Home />} />
+      <Route path=":area" element={<Area />} />
       <Route path="/about" element={<About />} />
+      <Route path="*" element={<p>Not Found</p>} />
     </Routes>
   )
 }

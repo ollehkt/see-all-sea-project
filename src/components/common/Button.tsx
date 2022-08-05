@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAppDispatch } from '../../store/store'
@@ -14,22 +14,21 @@ interface PropsType {
 
 const Button = ({ name, value, color, fill }: PropsType) => {
   const dispatch = useAppDispatch()
+  const dataRef = useRef<any>([])
   const [data, setData] = useState<any>([])
   // const [lngData, setLng] = useState<any>([])
   const navigate = useNavigate()
 
   const buttonClickHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    const { value } = e.currentTarget
+    const { value, name } = e.currentTarget
     navigate(`/${value}`)
-    const res = await axios(
-      `https://apis.data.go.kr/1192000/service/OceansBeachInfoService1/getOceansBeachInfo1?pageNo=1&numOfRows=10&resultType=JSON&SIDO_NM=${name}&ServiceKey=i6NBYvSPoHeMW79uztyefBELCckuvljpWPNb8uIpR7CMbXatMgAL%2B%2Bhdd4Tn8YCPNF7iEoY3T2ErVa6GVaMPpQ%3D%3D`
-    )
-    setData(res.data.getOceansBeachInfo.item)
+  
+    setData(dataRef.current)
     // const latLngData = res.data.getOceansBeachInfo.item.map((item) => {
     //   setLat(latData.push(item.lat))
     //   setLng(lngData.push(item.lon))
     // })
-    dispatch(seaActions.selectArea({ item: res.data.getOceansBeachInfo.item }))
+    dispatch(seaActions.selectArea({ item: data }))
   }
 
   return (

@@ -9,7 +9,7 @@ function TheHeader() {
         <nav className="container mx-auto px-6 md:px-12 py-4">
           <div className="md:flex justify-between items-center">
             <div className="flex justify-between items-center">
-              <Link to="/home" className="">
+              <Link to="/" className="">
                 <svg
                   className="w-8 mr-2 fill-current"
                   xmlns="http://www.w3.org/2000/svg"

@@ -26,7 +26,7 @@ const WeatherPrac = ({ name }: PropsType) => {
         weather: [{ main: weahterState }],
         wind: { speed, deg },
       } = res.data
-      // setWeatherInfo({})
+
       dispatch(
         weatherActions.getWeather({
           payload: {
