@@ -2,8 +2,15 @@ import React, { useState } from 'react'
 
 interface PropsType {
   setInputValue: Function
+  noResult: string
+  isLoading: boolean
 }
-function Search({ setInputValue }: PropsType) {
+function Search({ setInputValue, noResult, isLoading }: PropsType) {
+  // if (!noResult) {
+  //   setIsLoading(true)
+  // } else if (noResult) {
+  //   setIsLoading(false)
+  // }
   return (
     <form>
       <div className="flex ">
@@ -27,6 +34,13 @@ function Search({ setInputValue }: PropsType) {
           </svg>
         </button>
       </div>
+      {isLoading ? (
+        <p className="text-2xl font-bold my-5">Loading...</p>
+      ) : noResult ? (
+        <p className="text-2xl font-bold my-5">찾으시는 결과가 없습니다</p>
+      ) : (
+        <p>검색이 완료되었습니다</p>
+      )}
     </form>
   )
 }

@@ -5,7 +5,7 @@ import Search from '../common/Search'
 function ReactKakaoMap() {
   // const positionRef = useRef<any>(null)
   // const arrRef = useRef<any>([])
-  const positions = useStoreSelector((state) => state.sea.item)
+  const positions: any = useStoreSelector((state) => state.sea.item)
   useEffect(() => {
     console.log(positions)
   }, [])
@@ -32,7 +32,7 @@ function ReactKakaoMap() {
 
   return (
     <Map className="z-999 w-[100%] h-[600px]" center={{ lat: 33.5563, lng: 126.79581 }} level={10}>
-      {positions.map((item) => (
+      {positions.map((item: any) => (
         <MapMarker
           key={`${item.title}-${item.latlng}`}
           position={item.latlng}

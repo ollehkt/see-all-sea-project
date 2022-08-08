@@ -23,6 +23,12 @@ const Home = () => {
             <br />
             안전해
           </h1>
+          <Link
+            className="flex justify-center items-center my-8 no-underline w-[122px] h-[48px] bg-cyan-400 mx-2 text-white text-2xl border-sky-400 rounded-md hover:bg-cyan-100 hover:text-blue-500 cursor-pointer transition-colors duration-300 shadow-md"
+            to="area"
+          >
+            시작해!
+          </Link>
         </div>
       </div>
       {/* <Outlet /> */}

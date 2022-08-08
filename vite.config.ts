@@ -9,7 +9,7 @@ export default defineConfig({
       '/api': {
         target: 'https://apis.data.go.kr',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/\/api/, ''),
+        rewrite: (path) => path.replace(/^\/api/, ''),
         secure: false,
         ws: true,
       },
