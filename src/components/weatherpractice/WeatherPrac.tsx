@@ -8,19 +8,48 @@ import ExtraInfo from './ExtraInfo'
 import { useLocation } from 'react-router'
 interface PropsType {
   name: string
-  state: string | undefined
 }
 
-const WeatherPrac = ({ name, state }: PropsType) => {
+const WeatherPrac = ({ name }: PropsType) => {
   const [area, setArea] = useState('')
-
+  const [isLoading, setIsLoading] = useState(false)
   const [weatherInfo, setWeatherInfo] = useState({})
   const dispatch = useAppDispatch()
-  const location = useLocation()
 
+  const changeAreaToEnglish = (name: string) => {
+    console.log(name)
+    if (name === '강원') {
+      setArea('kangwondo')
+    }
+    if (name === '경기') {
+      setArea('kyunggi')
+    }
+    if (name === '충북') {
+      setArea('chungbuk')
+    }
+    if (name === '충남') {
+      setArea('chungnam')
+    }
+    if (name === '경남') {
+      setArea('kyungnam')
+    }
+    if (name === '경북') {
+      setArea('kyungbuk')
+    }
+    if (name === '전남') {
+      setArea('jeonnam')
+    }
+    if (name === '전북') {
+      setArea('jeonbuk')
+    }
+    if (name === '제주') {
+      setArea('jeju')
+    }
+  }
   const getWeatherInfo = async () => {
+    setIsLoading(true)
     try {
-      const getWeahterAPI = `https://api.openweathermap.org/data/2.5/weather?appid=fd8c41971b0a86e981271f12825b6508&q=${area}&units=metric`
+      const getWeahterAPI = `https://api.openweathermap.org/data/2.5/weather?appid=3fd43df2329bf79cca8ca1f704eee2aa&q=${area}&units=metric`
       const res = await axios(`${getWeahterAPI}`)
       const {
         name,
@@ -52,37 +81,29 @@ const WeatherPrac = ({ name, state }: PropsType) => {
       )
     } catch (error) {
       console.error(error)
+    } finally {
+      setIsLoading(false)
     }
   }
   useEffect(() => {
+    changeAreaToEnglish(name)
+  }, [name])
+  useEffect(() => {
+    console.log(area)
     getWeatherInfo()
-    if (location.state === '강원') {
-      setArea((prev) => (prev = 'kangwon'))
-    } else if (location.state === '경기') {
-      setArea((prev) => (prev = 'kyunggi'))
-    } else if (location.state === '충북') {
-      setArea((prev) => (prev = 'chungbuk'))
-    } else if (location.state === '충남') {
-      setArea((prev) => (prev = 'chungnam'))
-    } else if (location.state === '경남') {
-      setArea((prev) => (prev = 'kyungnam'))
-    } else if (location.state === '경북') {
-      setArea((prev) => (prev = 'kyungbuk'))
-    } else if (location.state === '전남') {
-      setArea((prev) => (prev = 'jeonnam'))
-    } else if (location.state === '전북') {
-      setArea((prev) => (prev = 'jeonbuk'))
-    } else if (location.state === '제주') {
-      setArea((prev) => (prev = 'jeju'))
-    }
-    console.log(location)
-  }, [])
+  }, [area])
 
   return (
     <div className="flex w-[400px] h-[200px] flex-wrap rounded-md border-2 border-solid border-[#ced1d4] ">
-      <CurrentWeather />
-      <TempInfo />
-      <ExtraInfo />
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <CurrentWeather />
+          <TempInfo />
+          <ExtraInfo />
+        </>
+      )}
     </div>
   )
 }

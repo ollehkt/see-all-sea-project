@@ -15,8 +15,7 @@ import { useDispatch } from 'react-redux'
 // &base_date=20210628&base_time=0600&nx=55&ny=127
 // '
 const Area = () => {
-  const dispatch = useDispatch()
-  // const { item } = useStoreSelector((state) => state.sea)
+  const [datas, setDatas] = useState<any>([])
   const { area } = useParams()
   const [noResult, setNoResult] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -37,34 +36,65 @@ const Area = () => {
         setNoResult((prev) => (prev = '찾으시는 결과가 없습니다'))
         return
       }
+
       item.forEach((item: any) => {
         dataRef.current = [
           ...dataRef.current,
           { title: item.sta_nm, latlng: { lat: item.lat, lon: item.lon } },
         ]
       })
+      setDatas((prev: any) => (prev = dataRef.current))
     } catch (err) {
       console.log(err)
     } finally {
       setIsLoading(false)
     }
   }
+  const getSeaSpecificInfo = async () => {
+    setIsLoading(true)
+    try {
+      const res = await axios(
+        `/api/1192000/service/OceansBeachInfoService1/getOceansBeachInfo1?pageNo=1&numOfRows=100&resultType=JSON&SIDO_NM=${inputValue}&ServiceKey=i6NBYvSPoHeMW79uztyefBELCckuvljpWPNb8uIpR7CMbXatMgAL%2B%2Bhdd4Tn8YCPNF7iEoY3T2ErVa6GVaMPpQ%3D%3D`
+      )
+      const { item, totalCount } = res.data.getOceansBeachInfo
+      if (totalCount === 0) {
+        setNoResult((prev) => (prev = '찾으시는 결과가 없습니다'))
+        return
+      }
+      item.forEach((item: any) => {
+        dataRef.current = [
+          ...dataRef.current,
+          { title: item.sta_nm, latlng: { lat: item.lat, lon: item.lon } },
+        ]
+      })
+      setDatas((prev: any) => (prev = dataRef.current))
+    } catch (error) {
+      console.log(error)
+    }
+  }
   useEffect(() => {
+    setDatas((prev: []) => (prev = []))
     setNoResult((prev) => (prev = ''))
     dataRef.current = []
     getSeaInfo()
   }, [area])
+  useEffect(() => {
+    setDatas((prev: []) => (prev = []))
+    setNoResult((prev) => (prev = ''))
+    dataRef.current = []
+    // getSeaSpecificInfo()
+  }, [inputValue])
 
   return (
     <div className="">
       <div className="flex justify-between">
-        <div>About {area}</div>
+        <div className="text-2xl font-bold"> {area} 내의 도시 이름으로 검색해!</div>
         <Search setInputValue={setInputValue} noResult={noResult} isLoading={isLoading} />
-        <WeatherPrac name="" state={area} />
+        <WeatherPrac name={area}  />
       </div>
 
       <div>
-        <ReactKakaoMap />
+        <ReactKakaoMap datas={datas} place={inputValue} />
       </div>
     </div>
   )

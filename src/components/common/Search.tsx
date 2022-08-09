@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, FormEvent, useState } from 'react'
 
 interface PropsType {
   setInputValue: Function
@@ -11,14 +11,14 @@ function Search({ setInputValue, noResult, isLoading }: PropsType) {
   // } else if (noResult) {
   //   setIsLoading(false)
   // }
+  const submitInput = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setInputValue(e.currentTarget[0].value)
+  }
   return (
-    <form>
-      <div className="flex ">
-        <input
-          className="h-[20px] text-xl"
-          type="text"
-          onChange={(e) => setInputValue(e.currentTarget.value)}
-        />
+    <form onSubmit={submitInput}>
+      <div className="flex">
+        <input className="h-[20px] text-xl" type="text" placeholder="도시명으로 검색하기" />
         <button>
           <svg
             className="w-6 h-6"
