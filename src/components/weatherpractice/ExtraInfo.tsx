@@ -49,7 +49,7 @@ function ExtraInfo() {
     })
   }
   return (
-    <div className="flex justify-between items-center text-[60px] w-[100%] border-b-2 border-[#ced1d4] border-solid  ">
+    <div className="flex justify-between items-center text-[60px] w-[100%] ">
       <div className="flex justify-center items-center w-[200px] font-semibold">
         <WiSunrise className="text-[50px] color-[#ff7500]" />
         <p className="text-[15px] text-center">

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
-const areas = ['강원', '경기', '충북', '충남', '경남', '경북', '전남', '전북', '제주']
+const areas = ['강원', '인천', '충남', '경남', '경북', '전남', '전북', '제주', '부산']
 function Nav() {
   return (
     <>

@@ -2,11 +2,7 @@
 module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,tsx}'],
   theme: {
-    extend: {
-      fontFamily: {
-        font: ['Montserrat'],
-      },
-    },
+    extend: {},
   },
   corePlugins: {
     preflight: false,

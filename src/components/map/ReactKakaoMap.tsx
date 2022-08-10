@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react'
+import WeatherPrac from './../weatherpractice/WeatherPrac'
 import {
   CustomOverlayMap,
   Map,
@@ -7,18 +8,25 @@ import {
   MarkerClusterer,
   ZoomControl,
 } from 'react-kakao-maps-sdk'
+import WaterInfo from '../ViewWaterInfo'
+import ViewBeachInfo from './../ViewBeachInfo'
 
 interface PropsType {
   datas: []
-  place: string
+  area: string
 }
 
-function ReactKakaoMap({ datas, place }: PropsType) {
+function ReactKakaoMap({ datas, area }: PropsType) {
   const [isOpen, setIsOpen] = useState(false)
   const [map, setMap] = useState<any>()
-  const [markers, setMarkers] = useState<any>([])
+  const [viewInfo, setViewInfo] = useState<any>({
+    viewWeather: true,
+    viewWaterInfo: false,
+    viewInformation: false,
+  })
   const mapRef = useRef<any>()
-  const levelRef = useRef<any>(10)
+  const [areaInfo, setAreaInfo] = useState<any>()
+  
   const bounds = useMemo(() => {
     const bounds = new kakao.maps.LatLngBounds()
 
@@ -30,56 +38,18 @@ function ReactKakaoMap({ datas, place }: PropsType) {
 
   useEffect(() => {
     console.log(datas)
+    const map = mapRef.current
+    if (map) map.setBounds(bounds)
   }, [datas])
-  useEffect(() => {}, [map])
-
-  const MovieChart = () => (
-    <div className="overlaybox">
-      <div className="boxtitle">금주 영화순위</div>
-      <div className="first">
-        <div className="triangle text">1</div>
-        <div className="movietitle text">드래곤 길들이기2</div>
-      </div>
-      <ul>
-        <li className="up">
-          <span className="number">2</span>
-          <span className="title">명량</span>
-          <span className="arrow up"></span>
-          <span className="count">2</span>
-        </li>
-        <li>
-          <span className="number">3</span>
-          <span className="title">해적(바다로 간 산적)</span>
-          <span className="arrow up"></span>
-          <span className="count">6</span>
-        </li>
-        <li>
-          <span className="number">4</span>
-          <span className="title">해무</span>
-          <span className="arrow up"></span>
-          <span className="count">3</span>
-        </li>
-        <li>
-          <span className="number">5</span>
-          <span className="title">안녕, 헤이즐</span>
-          <span className="arrow down"></span>
-          <span className="count">1</span>
-        </li>
-      </ul>
-    </div>
-  )
+  useEffect(() => {}, [bounds])
 
   return (
     <>
       <Map
-        className="z-999 w-[100%] h-[600px]"
+        className="z-999 w-[1200px] h-[600px] rounded-md mx-auto  bg-slate-100"
         center={{ lat: 33.5563, lng: 126.79581 }}
         level={10}
         ref={mapRef}
-        onCreate={() => {
-          const map = mapRef.current
-          if (map) map.setBounds(bounds)
-        }}
       >
         <MarkerClusterer
           averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
@@ -92,29 +62,90 @@ function ReactKakaoMap({ datas, place }: PropsType) {
               image={{
                 src: '/KakaoTalk_20220523_141914763.jpg', // 마커이미지의 주소입니다
                 size: {
-                  width: 24,
-                  height: 24,
+                  width: 48,
+                  height: 48,
                 },
               }}
               title={item.title}
-              onClick={(marker) => {
-                setIsOpen((prev) => (prev = !isOpen))
-                map.panTo(marker.getPosition())
+              onClick={() => {
+                setIsOpen(true)
+                setAreaInfo(item)
               }}
-            />
+            >
+              {isOpen && areaInfo.latlng === item.latlng && (
+                <div className="w-[400px] border-none rounded-md p-10 bg-slate-100 text-cyan-400">
+                  <div className="text-2xl  flex">
+                    <span className="flex-grow">{areaInfo.title}</span>
+                    <svg
+                      className="w-6 h-6 hover:cursor-pointer hover:text-white hover:bg-cyan-400 rounded-full"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                      onClick={() => setIsOpen((prev: boolean) => !prev)}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div className="my-5">
+                    <span className="mr-5">지역:</span>
+                    {areaInfo.gugun_nm}
+                  </div>
+                  <div className="my-5">
+                    <span className="mr-5">TEL:</span>
+                    {areaInfo.tel}
+                  </div>
+                  <div className="flex text-2xl justify-between">
+                    <div
+                      className="w-[100px] mb-2 p-1 rounded-xl border-2 border-cyan-400 border-solid text-center hover:cursor-pointer hover:text-white hover:bg-cyan-400"
+                      onClick={() => {
+                        setViewInfo({
+                          ...viewInfo,
+                          viewWeather: true,
+                          viewWaterInfo: false,
+                          viewInformation: false,
+                        })
+                      }}
+                    >
+                      날씨
+                    </div>
+                    <div
+                      className=" w-[100px] mb-2 p-1 rounded-xl border-2 border-cyan-400 border-solid text-center hover:cursor-pointer hover:text-white hover:bg-cyan-400"
+                      onClick={() => {
+                        setViewInfo({
+                          ...viewInfo,
+                          viewWeather: false,
+                          viewWaterInfo: true,
+                          viewInformation: false,
+                        })
+                      }}
+                    >
+                      수질
+                    </div>
+                    <div
+                      className="w-[100px] mb-2 p-1 rounded-xl border-2 border-cyan-400 border-solid text-center hover:cursor-pointer hover:text-white hover:bg-cyan-400"
+                      onClick={() => {
+                        setViewInfo({
+                          ...viewInfo,
+                          viewWeather: false,
+                          viewWaterInfo: false,
+                          viewInformation: true,
+                        })
+                      }}
+                    >
+                      정보
+                    </div>
+                  </div>
+                  {viewInfo.viewWeather && <WeatherPrac latlng={areaInfo.latlng} />}
+                  {viewInfo.viewWaterInfo && <WaterInfo area={area} areaInfo={areaInfo} />}
+                  {viewInfo.viewInformation && <ViewBeachInfo />}
+                </div>
+              )}
+            </MapMarker>
           ))}
-          <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
-            // 커스텀 오버레이가 표시될 위치입니다
-            position={{
-              lat: 33.450701,
-              lng: 127.026581,
-            }}
-            // 커스텀 오버레이가에 대한 확장 옵션
-            xAnchor={0.3}
-            yAnchor={0.91}
-          >
-            <MovieChart />
-          </CustomOverlayMap>
 
           {/* <div style={{ color: '#000' }}>나타낼 바다 이름</div> */}
           <ZoomControl position={kakao.maps.ControlPosition.TOPRIGHT} />

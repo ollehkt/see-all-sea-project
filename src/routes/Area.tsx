@@ -32,6 +32,7 @@ const Area = () => {
         `/api/1192000/service/OceansBeachInfoService1/getOceansBeachInfo1?pageNo=1&numOfRows=100&resultType=JSON&SIDO_NM=${area}&ServiceKey=i6NBYvSPoHeMW79uztyefBELCckuvljpWPNb8uIpR7CMbXatMgAL%2B%2Bhdd4Tn8YCPNF7iEoY3T2ErVa6GVaMPpQ%3D%3D`
       )
       const { item, totalCount } = res.data.getOceansBeachInfo
+      console.log(res.data.getOceansBeachInfo)
       if (totalCount === 0) {
         setNoResult((prev) => (prev = '찾으시는 결과가 없습니다'))
         return
@@ -40,7 +41,13 @@ const Area = () => {
       item.forEach((item: any) => {
         dataRef.current = [
           ...dataRef.current,
-          { title: item.sta_nm, latlng: { lat: item.lat, lon: item.lon } },
+          {
+            title: item.sta_nm,
+            latlng: { lat: item.lat, lon: item.lon },
+            tel: item.link_tel,
+            gugun_nm: item.gugun_nm,
+            sta_nm: item.sta_nm,
+          },
         ]
       })
       setDatas((prev: any) => (prev = dataRef.current))
@@ -50,28 +57,7 @@ const Area = () => {
       setIsLoading(false)
     }
   }
-  const getSeaSpecificInfo = async () => {
-    setIsLoading(true)
-    try {
-      const res = await axios(
-        `/api/1192000/service/OceansBeachInfoService1/getOceansBeachInfo1?pageNo=1&numOfRows=100&resultType=JSON&SIDO_NM=${inputValue}&ServiceKey=i6NBYvSPoHeMW79uztyefBELCckuvljpWPNb8uIpR7CMbXatMgAL%2B%2Bhdd4Tn8YCPNF7iEoY3T2ErVa6GVaMPpQ%3D%3D`
-      )
-      const { item, totalCount } = res.data.getOceansBeachInfo
-      if (totalCount === 0) {
-        setNoResult((prev) => (prev = '찾으시는 결과가 없습니다'))
-        return
-      }
-      item.forEach((item: any) => {
-        dataRef.current = [
-          ...dataRef.current,
-          { title: item.sta_nm, latlng: { lat: item.lat, lon: item.lon } },
-        ]
-      })
-      setDatas((prev: any) => (prev = dataRef.current))
-    } catch (error) {
-      console.log(error)
-    }
-  }
+
   useEffect(() => {
     setDatas((prev: []) => (prev = []))
     setNoResult((prev) => (prev = ''))
@@ -90,11 +76,10 @@ const Area = () => {
       <div className="flex justify-between">
         <div className="text-2xl font-bold"> {area} 내의 도시 이름으로 검색해!</div>
         <Search setInputValue={setInputValue} noResult={noResult} isLoading={isLoading} />
-        <WeatherPrac name={area}  />
       </div>
 
       <div>
-        <ReactKakaoMap datas={datas} place={inputValue} />
+        <ReactKakaoMap datas={datas} place={inputValue} area={area} />
       </div>
     </div>
   )
