@@ -6,13 +6,13 @@ import Slick from './../carousel/Slick'
 function AreaList() {
   return (
     <>
-      {/* <Antd /> */}
+      <Antd />
       {/* <Responsive /> */}
-      <Slick />
+      {/* <Slick /> */}
 
-      <div className=" h-[450px] container mx-auto px-6 md:px-12 relative z-10 flex items-center py-32 xl:py-40">
-        <div className="lg:w-3/5 xl:w-2/5 flex flex-col items-start relative z-10">
-          <h1 className="font-bold text-6xl sm:text-6xl text-white leading-3 line">
+      <div className=" h-[200px] container mx-auto  relative z-10 flex justify-center items-center py-2 xl:py-4">
+        <div className="z-10 relative">
+          <h1 className="font-bold text-4xl sm:text-6xl text-cyan-400 line animate-bounce ">
             원하는 지역을 선택 해!
             <br />
           </h1>

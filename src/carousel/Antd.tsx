@@ -5,46 +5,10 @@ import { Carousel } from 'antd'
 function Antd() {
   return (
     <div>
-      <Carousel className="w-[800px] mx-auto my-[10px]">
-        <div>
-          <div
-            style={{
-              height: '160px',
-              color: '#fff',
-              lineHeight: '160px',
-              textAlign: 'center',
-              background: '#364d79',
-            }}
-          >
-            1
-          </div>
-        </div>
-        <div>
-          <div
-            style={{
-              height: '160px',
-              color: '#fff',
-              lineHeight: '160px',
-              textAlign: 'center',
-              background: '#364d79',
-            }}
-          >
-            2
-          </div>
-        </div>
-        <div>
-          <div
-            style={{
-              height: '160px',
-              color: '#fff',
-              lineHeight: '160px',
-              textAlign: 'center',
-              background: '#364d79',
-            }}
-          >
-            3
-          </div>
-        </div>
+      <Carousel className="w-[1200px] mx-auto my-[10px]">
+        <img src="/beach-g69064a5d5_1280.jpg" className="h-[500px]" />
+        <img src="/hd-wallpaper-g04176a2a8_1280.jpg" className="h-[500px]" />
+        <img src="/public/drink-g4ca9558e1_1280.jpg" className="h-[500px]" />
       </Carousel>
     </div>
   )

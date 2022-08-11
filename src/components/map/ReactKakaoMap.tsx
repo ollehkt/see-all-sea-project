@@ -9,7 +9,7 @@ import {
   ZoomControl,
 } from 'react-kakao-maps-sdk'
 import WaterInfo from '../ViewWaterInfo'
-import ViewBeachInfo from './../ViewBeachInfo'
+import ViewBeachComments from '../ViewBeachComments'
 
 interface PropsType {
   datas: []
@@ -26,7 +26,7 @@ function ReactKakaoMap({ datas, area }: PropsType) {
   })
   const mapRef = useRef<any>()
   const [areaInfo, setAreaInfo] = useState<any>()
-  
+
   const bounds = useMemo(() => {
     const bounds = new kakao.maps.LatLngBounds()
 
@@ -96,7 +96,7 @@ function ReactKakaoMap({ datas, area }: PropsType) {
                   </div>
                   <div className="my-5">
                     <span className="mr-5">TEL:</span>
-                    {areaInfo.tel}
+                    {areaInfo.tel ? areaInfo.tel : '번호 정보가 없습니다'}
                   </div>
                   <div className="flex text-2xl justify-between">
                     <div
@@ -136,12 +136,12 @@ function ReactKakaoMap({ datas, area }: PropsType) {
                         })
                       }}
                     >
-                      정보
+                      후기
                     </div>
                   </div>
                   {viewInfo.viewWeather && <WeatherPrac latlng={areaInfo.latlng} />}
                   {viewInfo.viewWaterInfo && <WaterInfo area={area} areaInfo={areaInfo} />}
-                  {viewInfo.viewInformation && <ViewBeachInfo />}
+                  {viewInfo.viewInformation && <ViewBeachComments />}
                 </div>
               )}
             </MapMarker>

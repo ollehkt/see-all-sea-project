@@ -4,10 +4,10 @@ import { Carousel } from 'react-responsive-carousel'
 
 function Responsive() {
   return (
-    <Carousel infiniteLoop>
-      <div className="h-[300px] bg-cyan-200">1</div>
-      <div className="h-[300px] bg-cyan-200">2</div>
-      <div className="h-[300px] bg-cyan-200">3</div>
+    <Carousel infiniteLoop className="w-[1200px] h-[300px] mx-auto">
+      <img src="/public/beach-g69064a5d5_1280.jpg" className="object-cover" />
+      <img src="/public/beautiful-tropical-empty-beach-sea-ocean-with-white-cloud-on-blue-sky-background_74190-13665.webp" />
+      <img src="/public/drink-g4ca9558e1_1280.jpg" />
     </Carousel>
   )
 }

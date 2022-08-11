@@ -9,11 +9,10 @@ function CurrentWeather() {
 
   return (
     <div className="flex items-center justify-center text-3xl m-auto">
-      {name} &nbsp;/{' '}
-      <span className="flex items-center text-4xl">
+      <span className="mx-5">{temp}&deg;</span>
+      <span className="flex items-center text-5xl">
         <CurrentWeatherIcon weatherState={weahterState} />
       </span>
-      <span className="mx-5">{temp}&deg;</span>
     </div>
   )
 }
