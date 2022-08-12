@@ -2,8 +2,10 @@ import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 
 interface PropsType {
-  area: string
-  areaInfo: {}
+  area: string | undefined
+  areaInfo: {
+    sta_nm: string
+  }
 }
 
 function WaterInfo({ area, areaInfo }: PropsType) {
@@ -16,10 +18,10 @@ function WaterInfo({ area, areaInfo }: PropsType) {
       const res = await axios(
         `https://www.meis.go.kr/service/OceansBeachSeawaterService/getOceansBeachSeawaterInfo?serviceKey=i6NBYvSPoHeMW79uztyefBELCckuvljpWPNb8uIpR7CMbXatMgAL%2B%2Bhdd4Tn8YCPNF7iEoY3T2ErVa6GVaMPpQ%3D%3D&pageNo=1&numOfRows=1500&resultType=JSON&SIDO_NM=${area}&RES_YEAR=2019&SG_APIM=2ug8Dm9qNBfD32JLZGPN64f3EoTlkpD8kSOHWfXpyrY`
       )
-      console.log('불러온데이터:', res.data.getOceansBeachSeawaterInfo.item)
-      filteredItemRef.current = res.data.getOceansBeachSeawaterInfo.item.filter((el: any) => {
-        el.sta_nm === areaInfo.sta_nm
-      })
+
+      filteredItemRef.current = res.data.getOceansBeachSeawaterInfo.item.filter(
+        (el: any) => el.sta_nm === areaInfo.sta_nm
+      )
       console.log(filteredItemRef.current)
       setItems(filteredItemRef.current)
     } catch (error) {
@@ -31,9 +33,6 @@ function WaterInfo({ area, areaInfo }: PropsType) {
   useEffect(() => {
     getWaterInfo()
   }, [])
-  useEffect(() => {
-    console.log('filter', items)
-  }, [filteredItemRef.current])
   return (
     <div className="w-[400px] h-[200px] flex justify-center items-center rounded-md border-2 border-solid border-cyan-400 text-cyan-400">
       {isLoading ? (
@@ -57,10 +56,10 @@ function WaterInfo({ area, areaInfo }: PropsType) {
           <span className="sr-only">Loading...</span>
         </div>
       ) : (
-        'WaterInfo'
+        <div className="text-3xl">
+          {items && items[0]?.res_yn === '적합' ? <div>적합!</div> : <div>정보없음!</div>}
+        </div>
       )}
-
-      {filteredItemRef.sta_nm}
     </div>
   )
 }

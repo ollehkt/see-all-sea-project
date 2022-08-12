@@ -12,11 +12,12 @@ import WaterInfo from '../ViewWaterInfo'
 import ViewBeachComments from '../ViewBeachComments'
 
 interface PropsType {
-  datas: []
-  area: string
+  seaDatas: []
+  waterDatas: []
+  area: string | undefined
 }
 
-function ReactKakaoMap({ datas, area }: PropsType) {
+function ReactKakaoMap({ seaDatas, area }: PropsType) {
   const [isOpen, setIsOpen] = useState(false)
   const [map, setMap] = useState<any>()
   const [viewInfo, setViewInfo] = useState<any>({
@@ -30,17 +31,17 @@ function ReactKakaoMap({ datas, area }: PropsType) {
   const bounds = useMemo(() => {
     const bounds = new kakao.maps.LatLngBounds()
 
-    datas.forEach((data) => {
+    seaDatas.forEach((data) => {
       bounds.extend(new kakao.maps.LatLng(data.latlng.lat, data.latlng.lon))
     })
     return bounds
-  }, [datas])
+  }, [seaDatas])
 
   useEffect(() => {
-    console.log(datas)
+    console.log(seaDatas)
     const map = mapRef.current
     if (map) map.setBounds(bounds)
-  }, [datas])
+  }, [seaDatas])
   useEffect(() => {}, [bounds])
 
   return (
@@ -55,7 +56,7 @@ function ReactKakaoMap({ datas, area }: PropsType) {
           averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
           minLevel={10} // 클러스터 할 최소 지도 레벨
         >
-          {datas.map((item: any, index) => (
+          {seaDatas.map((item: any, index) => (
             <MapMarker
               key={`${item.title}-${index}`}
               position={{ lat: item.latlng.lat, lng: item.latlng.lon }}
@@ -73,7 +74,7 @@ function ReactKakaoMap({ datas, area }: PropsType) {
               }}
             >
               {isOpen && areaInfo.latlng === item.latlng && (
-                <div className="w-[400px] border-none rounded-md p-10 bg-slate-100 text-cyan-400">
+                <div className=" border-none rounded-md p-10 bg-slate-100 text-cyan-400">
                   <div className="text-2xl  flex">
                     <span className="flex-grow">{areaInfo.title}</span>
                     <svg

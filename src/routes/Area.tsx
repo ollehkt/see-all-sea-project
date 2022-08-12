@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import useConvertLatLng from '../hooks/UseConvertLatLng'
 import Weather from '../components/Weather'
-import { useStoreSelector } from '../store/store'
+import { useAppDispatch, useStoreSelector } from '../store/store'
 import WeatherPrac from '../components/weatherpractice/WeatherPrac'
 import { useParams } from 'react-router-dom'
 import Search from '../components/common/Search'
@@ -16,16 +16,16 @@ import { Spinner } from 'flowbite-react'
 // &base_date=20210628&base_time=0600&nx=55&ny=127
 // '
 const Area = () => {
-  const [datas, setDatas] = useState<any>([])
+  const [seaDatas, setSeaDatas] = useState<any>([])
+
   const { area } = useParams()
   const [noResult, setNoResult] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const useDispatch = useAppDispatch()
+  const seaDataRef = useRef<any>([])
 
-  const dataRef = useRef<any>([])
   // inputValue 바탕으로 state 날씨와 맵에 useLocation으로 넘겨주기
 
-  //  검색을 바탕으로 요청 보내기
-  const [inputValue, setInputValue] = useState('')
   const getSeaInfo = async () => {
     setIsLoading(true)
     try {
@@ -40,8 +40,8 @@ const Area = () => {
       }
 
       item.forEach((item: any) => {
-        dataRef.current = [
-          ...dataRef.current,
+        seaDataRef.current = [
+          ...seaDataRef.current,
           {
             title: item.sta_nm,
             latlng: { lat: item.lat, lon: item.lon },
@@ -51,7 +51,7 @@ const Area = () => {
           },
         ]
       })
-      setDatas((prev: any) => (prev = dataRef.current))
+      setSeaDatas((prev: any) => (prev = seaDataRef.current))
     } catch (err) {
       console.log(err)
     } finally {
@@ -60,17 +60,11 @@ const Area = () => {
   }
 
   useEffect(() => {
-    setDatas((prev: []) => (prev = []))
+    setSeaDatas((prev: []) => (prev = []))
     setNoResult((prev) => (prev = ''))
-    dataRef.current = []
+    seaDataRef.current = []
     getSeaInfo()
   }, [area])
-  useEffect(() => {
-    setDatas((prev: []) => (prev = []))
-    setNoResult((prev) => (prev = ''))
-    dataRef.current = []
-    // getSeaSpecificInfo()
-  }, [inputValue])
 
   return (
     <div className="">
@@ -102,7 +96,7 @@ const Area = () => {
       </div>
 
       <div>
-        <ReactKakaoMap datas={datas} place={inputValue} area={area} />
+        <ReactKakaoMap seaDatas={seaDatas} area={area} />
       </div>
     </div>
   )

@@ -21,7 +21,7 @@ function TheHeader() {
                   <path d="M16.16 5.82H0L8.08 0l8.08 5.82z"></path>
                 </svg>
               </Link>
-              <div className="md:hidden">
+              {/* <div className="md:hidden">
                 <button className="text-white focus:outline-none">
                   <svg
                     className="h-12 w-12"
@@ -38,7 +38,7 @@ function TheHeader() {
                     ></path>
                   </svg>
                 </button>
-              </div>
+              </div> */}
             </div>
             <div className="text-white text-4xl font-bold ">
               <h1 className="">안전해</h1>
