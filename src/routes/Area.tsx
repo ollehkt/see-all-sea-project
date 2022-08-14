@@ -2,19 +2,12 @@ import React, { useEffect, useState, useRef } from 'react'
 import ReactKakaoMap from '../components/map/ReactKakaoMap'
 import axios from 'axios'
 
-import useConvertLatLng from '../hooks/UseConvertLatLng'
-import Weather from '../components/Weather'
 import { useAppDispatch, useStoreSelector } from '../store/store'
-import WeatherPrac from '../components/weatherpractice/WeatherPrac'
-import { useParams } from 'react-router-dom'
-import Search from '../components/common/Search'
-import { useDispatch } from 'react-redux'
-import { Spinner } from 'flowbite-react'
 
-// const API ='http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst
-// ?serviceKey=인증키&numOfRows=10&pageNo=1
-// &base_date=20210628&base_time=0600&nx=55&ny=127
-// '
+import { useParams } from 'react-router-dom'
+
+const API_KEY = import.meta.env.VITE_SEA_APP_KEY
+
 const Area = () => {
   const [seaDatas, setSeaDatas] = useState<any>([])
 
@@ -30,7 +23,7 @@ const Area = () => {
     setIsLoading(true)
     try {
       const res = await axios(
-        `/api/1192000/service/OceansBeachInfoService1/getOceansBeachInfo1?pageNo=1&numOfRows=100&resultType=JSON&SIDO_NM=${area}&ServiceKey=i6NBYvSPoHeMW79uztyefBELCckuvljpWPNb8uIpR7CMbXatMgAL%2B%2Bhdd4Tn8YCPNF7iEoY3T2ErVa6GVaMPpQ%3D%3D`
+        `/api/1192000/service/OceansBeachInfoService1/getOceansBeachInfo1?pageNo=1&numOfRows=100&resultType=JSON&SIDO_NM=${area}&ServiceKey=${API_KEY}`
       )
       const { item, totalCount } = res.data.getOceansBeachInfo
       console.log(res.data.getOceansBeachInfo)

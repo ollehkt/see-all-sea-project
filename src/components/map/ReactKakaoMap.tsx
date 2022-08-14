@@ -13,7 +13,6 @@ import ViewBeachComments from '../ViewBeachComments'
 
 interface PropsType {
   seaDatas: []
-  waterDatas: []
   area: string | undefined
 }
 
@@ -31,7 +30,7 @@ function ReactKakaoMap({ seaDatas, area }: PropsType) {
   const bounds = useMemo(() => {
     const bounds = new kakao.maps.LatLngBounds()
 
-    seaDatas.forEach((data) => {
+    seaDatas.forEach((data: any) => {
       bounds.extend(new kakao.maps.LatLng(data.latlng.lat, data.latlng.lon))
     })
     return bounds

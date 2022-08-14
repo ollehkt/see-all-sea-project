@@ -7,6 +7,7 @@ interface PropsType {
     sta_nm: string
   }
 }
+const API_KEY = import.meta.env.VITE_SEA_APP_KEY
 
 function WaterInfo({ area, areaInfo }: PropsType) {
   const [items, setItems] = useState<any>([])
@@ -16,7 +17,7 @@ function WaterInfo({ area, areaInfo }: PropsType) {
     setIsLoading(true)
     try {
       const res = await axios(
-        `https://www.meis.go.kr/service/OceansBeachSeawaterService/getOceansBeachSeawaterInfo?serviceKey=i6NBYvSPoHeMW79uztyefBELCckuvljpWPNb8uIpR7CMbXatMgAL%2B%2Bhdd4Tn8YCPNF7iEoY3T2ErVa6GVaMPpQ%3D%3D&pageNo=1&numOfRows=1500&resultType=JSON&SIDO_NM=${area}&RES_YEAR=2019&SG_APIM=2ug8Dm9qNBfD32JLZGPN64f3EoTlkpD8kSOHWfXpyrY`
+        `https://www.meis.go.kr/service/OceansBeachSeawaterService/getOceansBeachSeawaterInfo?serviceKey=&pageNo=1&numOfRows=1500&resultType=JSON&SIDO_NM=${area}&RES_YEAR=2019&SG_APIM=2ug8Dm9qNBfD32JLZGPN64f3EoTlkpD8kSOHWfXpyrY`
       )
 
       filteredItemRef.current = res.data.getOceansBeachSeawaterInfo.item.filter(
@@ -57,7 +58,14 @@ function WaterInfo({ area, areaInfo }: PropsType) {
         </div>
       ) : (
         <div className="text-3xl">
-          {items && items[0]?.res_yn === '적합' ? <div>적합!</div> : <div>정보없음!</div>}
+          {items && items[0]?.res_yn === '적합' ? (
+            <div className="text-center">
+              <div>적합!</div>
+              <span className="text-sm">{items[0]?.res_year}년 제공된 정보라고 해!</span>
+            </div>
+          ) : (
+            <div>정보없음!</div>
+          )}
         </div>
       )}
     </div>

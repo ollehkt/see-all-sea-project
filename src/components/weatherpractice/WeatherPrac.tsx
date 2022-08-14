@@ -8,9 +8,13 @@ import ExtraInfo from './ExtraInfo'
 import { useLocation } from 'react-router'
 import { Spinner } from 'flowbite-react'
 interface PropsType {
-  latlng: {}
+  latlng: {
+    lat: number
+    lon: number
+  }
 }
 
+const API_KEY = import.meta.env.VITE_WEATHER_APP_KEY
 const WeatherPrac = ({ latlng }: PropsType) => {
   const [area, setArea] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -20,7 +24,7 @@ const WeatherPrac = ({ latlng }: PropsType) => {
   const getWeatherInfo = async () => {
     setIsLoading(true)
     try {
-      const getWeahterAPI = `https://api.openweathermap.org/data/2.5/weather?lat=${latlng.lat}&lon=${latlng.lon}&appid=3fd43df2329bf79cca8ca1f704eee2aa&&units=metric`
+      const getWeahterAPI = `https://api.openweathermap.org/data/2.5/weather?lat=${latlng.lat}&lon=${latlng.lon}&appid=${API_KEY}&units=metric`
       const res = await axios(`${getWeahterAPI}`)
       const {
         name,

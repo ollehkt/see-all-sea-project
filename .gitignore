@@ -26,3 +26,5 @@ TL_SCCO_CTPRVN.json
 *.docs
 TL_SCCO_CTPRVN.ts
 yarn.lock
+.env
+env.d.ts
