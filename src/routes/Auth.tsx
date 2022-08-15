@@ -8,7 +8,6 @@ import {
 } from 'firebase/auth'
 import { authService } from 'firebase'
 import { Link } from 'react-router-dom'
-import CheckableTag from 'antd/lib/tag/CheckableTag'
 
 function Auth() {
   const [user, setUser] = useState({

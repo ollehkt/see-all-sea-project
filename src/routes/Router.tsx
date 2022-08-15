@@ -6,7 +6,6 @@ import About from './About'
 import AreaList from './AreaList'
 import Nav from './Nav'
 import Auth from './Auth'
-import AuthForm from './AuthForm'
 
 const Router = () => {
   const [isLogged, setIsLogged] = useState(false)

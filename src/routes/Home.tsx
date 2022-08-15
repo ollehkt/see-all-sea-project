@@ -1,19 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import Button from '../components/common/Button'
-import axios from 'axios'
-import Naver from '../components/map/Naver'
-import TheHeader from '../components/TheHeader'
-import TheFooter from '../components/TheFooter'
-import Router from './Router'
-import WeatherPrac from '../components/Weather/Weather'
-import { useStoreSelector } from '../store/store'
-import { Link, NavLink, Outlet } from 'react-router-dom'
-import ReactKakaoMap from '../components/map/ReactKakaoMap'
-import { Carousel } from 'flowbite-react'
+import React from 'react'
+import { Link } from 'react-router-dom'
+
 const area = ['강원', '경기', '충북', '충남', '경남', '경북', '전남', '전북', '제주']
 const Home = () => {
-  const { weather } = useStoreSelector((state) => state.weather)
-  console.log(weather)
   return (
     <>
       <div className=" h-[450px] container mx-auto px-6 md:px-12 relative z-10 flex items-center py-32 xl:py-40">
@@ -31,7 +20,6 @@ const Home = () => {
           </Link>
         </div>
       </div>
-      {/* <Outlet /> */}
     </>
   )
 }

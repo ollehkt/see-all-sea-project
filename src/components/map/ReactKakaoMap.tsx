@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import WeatherPrac from 'components/Weather/Weather'
 import {
   CustomOverlayMap,
@@ -144,7 +144,9 @@ function ReactKakaoMap({ seaDatas, area }: PropsType) {
                   </div>
                   {viewInfo.viewWeather && <WeatherPrac latlng={areaInfo.latlng} />}
                   {viewInfo.viewWaterInfo && <WaterInfo area={area} areaInfo={areaInfo} />}
-                  {viewInfo.viewInformation && <ViewBeachComments />}
+                  {viewInfo.viewInformation && (
+                    <ViewBeachComments areaInfo={areaInfo} />
+                  )}
                 </div>
               )}
             </MapMarker>

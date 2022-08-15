@@ -11,7 +11,6 @@ function App() {
   const navigate = useNavigate()
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
-      console.log(user)
       if (user) {
         setIsLogged(true)
       } else {
