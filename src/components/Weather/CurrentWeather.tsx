@@ -1,5 +1,5 @@
 import React from 'react'
-import { useStoreSelector } from '../../store/store'
+import { useStoreSelector } from 'store/store'
 import CurrentWeatherIcon from './CurrentWeatherIcon'
 import ExtraInfo from './ExtraInfo'
 import TempInfo from './TempInfo'

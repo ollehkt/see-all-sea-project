@@ -23,6 +23,7 @@
       "kakao.maps.d.ts",
       "vite/client"
     ],
+    "baseUrl": "src",
   },
   "include": [
     "src"

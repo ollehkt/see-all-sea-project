@@ -1,14 +1,9 @@
 import React from 'react'
-import Antd from '../carousel/Antd'
-import Responsive from '../carousel/Responsive'
-import Slick from './../carousel/Slick'
+import Antd from 'carousel/Antd'
 
 function AreaList() {
   return (
     <>
-      {/* <Responsive /> */}
-      {/* <Slick /> */}
-
       <div className=" h-[800px] container mx-auto  relative z-10 flex flex-col justify-center items-center py-2 xl:py-4">
         <div className="z-10 relative">
           <h1 className="font-bold text-4xl sm:text-6xl text-cyan-800 line animate-bounce ">

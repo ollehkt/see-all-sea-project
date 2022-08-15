@@ -16,7 +16,7 @@
     "antd": "^4.22.4",
     "axios": "^0.27.2",
     "echarts": "^5.3.3",
-    "firebase": "^9.9.1",
+    "firebase": "^9.9.2",
     "flowbite": "^1.5.1",
     "flowbite-react": "^0.1.5",
     "react": "^18.2.0",
@@ -27,7 +27,8 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.3.0",
     "react-slick": "^0.29.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "vite-tsconfig-paths": "^3.5.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.15",

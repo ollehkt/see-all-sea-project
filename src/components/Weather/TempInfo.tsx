@@ -1,5 +1,5 @@
 import React from 'react'
-import { useStoreSelector } from '../../store/store'
+import { useStoreSelector } from 'store/store'
 
 function TempInfo() {
   const { feels_like, temp_max, temp_min } = useStoreSelector(

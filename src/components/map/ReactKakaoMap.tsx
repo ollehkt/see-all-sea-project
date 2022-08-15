@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react'
-import WeatherPrac from './../weatherpractice/WeatherPrac'
+import WeatherPrac from 'components/Weather/Weather'
 import {
   CustomOverlayMap,
   Map,
@@ -8,8 +8,8 @@ import {
   MarkerClusterer,
   ZoomControl,
 } from 'react-kakao-maps-sdk'
-import WaterInfo from '../ViewWaterInfo'
-import ViewBeachComments from '../ViewBeachComments'
+import WaterInfo from '../WaterInfo/ViewWaterInfo'
+import ViewBeachComments from '../BeachComment/ViewBeachComments'
 
 interface PropsType {
   seaDatas: []
@@ -37,7 +37,6 @@ function ReactKakaoMap({ seaDatas, area }: PropsType) {
   }, [seaDatas])
 
   useEffect(() => {
-    console.log(seaDatas)
     const map = mapRef.current
     if (map) map.setBounds(bounds)
   }, [seaDatas])
@@ -74,8 +73,8 @@ function ReactKakaoMap({ seaDatas, area }: PropsType) {
             >
               {isOpen && areaInfo.latlng === item.latlng && (
                 <div className=" border-none rounded-md p-10 bg-slate-100 text-cyan-400">
-                  <div className="text-2xl  flex">
-                    <span className="flex-grow">{areaInfo.title}</span>
+                  <div className="text-3xl  flex">
+                    <span className="flex-grow">{areaInfo.title} 해수욕장</span>
                     <svg
                       className="w-6 h-6 hover:cursor-pointer hover:text-white hover:bg-cyan-400 rounded-full"
                       fill="currentColor"
@@ -91,12 +90,16 @@ function ReactKakaoMap({ seaDatas, area }: PropsType) {
                     </svg>
                   </div>
                   <div className="my-5">
-                    <span className="mr-5">지역:</span>
-                    {areaInfo.gugun_nm}
+                    <span className="text-lg mr-5">지역:</span>
+                    <span className="text-lg">{areaInfo.gugun_nm}</span>
                   </div>
                   <div className="my-5">
-                    <span className="mr-5">TEL:</span>
-                    {areaInfo.tel ? areaInfo.tel : '번호 정보가 없습니다'}
+                    <span className="text-lg mr-5">TEL:</span>
+                    {areaInfo.tel ? (
+                      <span className="text-lg">{areaInfo.tel}</span>
+                    ) : (
+                      <span className="text-lg">'번호 정보가 없습니다'</span>
+                    )}
                   </div>
                   <div className="flex text-2xl justify-between">
                     <div

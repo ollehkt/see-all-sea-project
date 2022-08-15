@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useAppDispatch } from './../../store/store'
-import { weatherActions } from '../../store/weather/weatherSlice'
+import { useAppDispatch } from 'store/store'
+import { weatherActions } from 'store/weather/weatherSlice'
 import CurrentWeather from './CurrentWeather'
 import TempInfo from './TempInfo'
 import ExtraInfo from './ExtraInfo'
-import { useLocation } from 'react-router'
-import { Spinner } from 'flowbite-react'
+
 interface PropsType {
   latlng: {
     lat: number

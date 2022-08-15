@@ -1,9 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
-import ReactKakaoMap from '../components/map/ReactKakaoMap'
+import ReactKakaoMap from 'components/map/ReactKakaoMap'
 import axios from 'axios'
-
-import { useAppDispatch, useStoreSelector } from '../store/store'
-
 import { useParams } from 'react-router-dom'
 
 const API_KEY = import.meta.env.VITE_SEA_APP_KEY
@@ -14,7 +11,7 @@ const Area = () => {
   const { area } = useParams()
   const [noResult, setNoResult] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const useDispatch = useAppDispatch()
+
   const seaDataRef = useRef<any>([])
 
   // inputValue 바탕으로 state 날씨와 맵에 useLocation으로 넘겨주기
@@ -26,7 +23,7 @@ const Area = () => {
         `/api/1192000/service/OceansBeachInfoService1/getOceansBeachInfo1?pageNo=1&numOfRows=100&resultType=JSON&SIDO_NM=${area}&ServiceKey=${API_KEY}`
       )
       const { item, totalCount } = res.data.getOceansBeachInfo
-      console.log(res.data.getOceansBeachInfo)
+
       if (totalCount === 0) {
         setNoResult((prev) => (prev = '찾으시는 결과가 없습니다'))
         return

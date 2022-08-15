@@ -1,11 +1,11 @@
 import React from 'react'
-import { useStoreSelector } from '../../store/store'
+import { useStoreSelector } from 'store/store'
 import { WiHumidity, WiStrongWind, WiSunrise, WiSunset } from 'react-icons/wi'
 
 interface propsType {
-  deg: number
+  deg: any // 왜 number 타입을 주면 타스 에러가 나는지?
 }
-export function WindDirection({ deg = 0 }: propsType): string {
+export function WindDirection({ deg = 0 }: propsType): any { // 반환값을 string을 주면 왜 타스 에러가 나는지?
   switch (true) {
     case (337.5 <= deg && deg <= 360) || (0 <= deg && deg < 22.5):
       return '북풍'
@@ -78,7 +78,8 @@ function ExtraInfo() {
         <WiStrongWind className="text-[50px] color-[#ff7500] " />
         <p className="text-[15px] text-center whitespace-nowrap ">
           {`${speed}m/s `}
-          <br />(<WindDirection deg={deg} />)
+          <br />
+          <WindDirection deg={deg} />
         </p>
       </div>
     </div>

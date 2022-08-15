@@ -28,3 +28,4 @@ TL_SCCO_CTPRVN.ts
 yarn.lock
 .env
 env.d.ts
+jsKakao.tsx
