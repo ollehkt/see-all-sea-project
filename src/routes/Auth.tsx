@@ -32,7 +32,6 @@ function Auth() {
         //login
         data = await signInWithEmailAndPassword(authService, user.email, user.password)
       }
-      console.log(data)
     } catch (error: any) {
       console.log(error.message)
       if (error.message === 'Firebase: Error (auth/email-already-in-use).') {

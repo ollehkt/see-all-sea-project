@@ -35,7 +35,7 @@ function WaterInfo({ area, areaInfo }: PropsType) {
     getWaterInfo()
   }, [])
   return (
-    <div className="w-[400px] h-[200px] flex justify-center items-center rounded-md border-2 border-solid border-cyan-400 text-cyan-400">
+    <div className="w-[400px] h-[250px] flex justify-center items-center rounded-md border-2 border-solid border-cyan-400 text-cyan-400">
       {isLoading ? (
         <div role="status">
           <svg

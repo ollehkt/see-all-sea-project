@@ -9,9 +9,11 @@ interface PropsType {
     sta_nm: string
   }
   comment: string
+  user: {}
 }
 
-function CommentList({ areaInfo, comment }: PropsType) {
+function CommentList({ areaInfo, comment, user }: PropsType) {
+  console.log(user)
   const [commentsLists, setCommentsLists] = useState<any>([])
   const [filteredCommentsLists, setFilteredCommentsList] = useState()
 
@@ -45,12 +47,12 @@ function CommentList({ areaInfo, comment }: PropsType) {
   //   return () => unsubscribe()
   // }, [])
   const filteredList = commentsLists.filter((list: any) => list.data().beach === areaInfo.sta_nm)
-  console.log(filteredList)
+  // console.log(filteredList)
 
   return (
     <div className="mx-4">
       {filteredList.map((list: any, index: number) => (
-        <Comment list={list} key={index} />
+        <Comment list={list} key={index} isOwner={list.data().creator === user} />
       ))}
     </div>
   )

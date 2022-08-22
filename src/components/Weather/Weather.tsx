@@ -65,7 +65,7 @@ const WeatherPrac = ({ latlng }: PropsType) => {
   }, [])
 
   return (
-    <div className="flex justify-center items-center w-[400px] h-[200px] box-border flex-wrap rounded-md border-2 border-solid border-cyan-400 text-cyan-400">
+    <div className="flex justify-center items-center w-[400px] h-[250px] box-border flex-wrap rounded-md border-2 border-solid border-cyan-400 text-cyan-400">
       {isLoading ? (
         <div role="status">
           <svg
