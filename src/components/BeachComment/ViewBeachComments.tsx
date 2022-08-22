@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { addDoc, collection } from 'firebase/firestore'
+import React, { useEffect, useState } from 'react'
+import { addDoc, collection, getDocs } from 'firebase/firestore'
 import { dbService } from 'firebase'
 import CommentList from './CommentList'
+import { useStoreSelector } from 'store/store'
 
 interface PropsType {
   areaInfo: {
@@ -11,6 +12,8 @@ interface PropsType {
 
 function ViewBeachComments({ areaInfo }: PropsType) {
   const [comment, setComment] = useState('')
+  const user = useStoreSelector((state) => state.userInfo.user.payload)
+
   const changeComment = (e: React.ChangeEvent<HTMLInputElement>) => {
     setComment(e.currentTarget.value)
   }
@@ -20,14 +23,14 @@ function ViewBeachComments({ areaInfo }: PropsType) {
       beach: areaInfo.sta_nm,
       comment,
       createdAt: Date.now(),
+      creator: user,
     })
     setComment('')
-    console.log(data)
   }
-  
+
   return (
-    <div className="w-[400px] h-[200px] flex justify-center  rounded-md border-2 border-solid border-cyan-400 text-cyan-400">
-      <form onSubmit={onSubmit} className="">
+    <div className="w-[400px] h-[200px]  overflow-y-scroll rounded-md border-2 border-solid border-cyan-400 text-cyan-400 ">
+      <form onSubmit={onSubmit} className="flex justify-center ">
         <input
           className="h-[30px] text-lg px-[10px] my-2 rounded-md"
           maxLength={10}
@@ -39,8 +42,8 @@ function ViewBeachComments({ areaInfo }: PropsType) {
         <button className="w-[80px] h-[30px] text-lg p-[2px] my-2 mx-2 border-2 border-cyan-400 rounded-md hover:bg-cyan-400 hover:text-white">
           등록해
         </button>
-        <CommentList areaInfo={areaInfo} comment={comment} />
       </form>
+      <CommentList areaInfo={areaInfo} comment={comment} />
     </div>
   )
 }

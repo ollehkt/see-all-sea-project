@@ -4,15 +4,20 @@ import Router from 'routes/Router'
 import TheHeader from 'components/TheHeader'
 import TheFooter from 'components/TheFooter'
 import { authService } from 'firebase'
+import { useAppDispatch } from 'store/store'
+import { userActions } from 'store/userInfo/userSlice'
 
 function App() {
   const [init, setInit] = useState(false)
   const [isLogged, setIsLogged] = useState<any>(authService.currentUser)
+  const [userObj, setUserObj] = useState<any>(null)
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
         setIsLogged(true)
+        dispatch(userActions.getUser({ payload: user.uid }))
       } else {
         setIsLogged(false)
       }
