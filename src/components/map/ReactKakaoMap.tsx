@@ -40,8 +40,9 @@ function ReactKakaoMap({ seaDatas, area }: PropsType) {
     const map = mapRef.current
     if (map) map.setBounds(bounds)
   }, [seaDatas])
-  useEffect(() => {}, [bounds])
 
+  console.log(seaDatas)
+  console.log(areaInfo)
   return (
     <>
       <Map
@@ -67,8 +68,8 @@ function ReactKakaoMap({ seaDatas, area }: PropsType) {
               }}
               title={item.title}
               onClick={() => {
-                setIsOpen(true)
                 setAreaInfo(item)
+                setIsOpen(true)
               }}
             >
               {isOpen && areaInfo.latlng === item.latlng && (
@@ -144,9 +145,7 @@ function ReactKakaoMap({ seaDatas, area }: PropsType) {
                   </div>
                   {viewInfo.viewWeather && <WeatherPrac latlng={areaInfo.latlng} />}
                   {viewInfo.viewWaterInfo && <WaterInfo area={area} areaInfo={areaInfo} />}
-                  {viewInfo.viewInformation && (
-                    <ViewBeachComments areaInfo={areaInfo} />
-                  )}
+                  {viewInfo.viewInformation && <ViewBeachComments areaInfo={areaInfo} />}
                 </div>
               )}
             </MapMarker>

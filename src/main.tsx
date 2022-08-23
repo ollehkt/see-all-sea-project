@@ -7,10 +7,21 @@ import { Provider } from 'react-redux'
 import { store } from './store/store'
 import { firebaseApp } from './firebase'
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+// ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+//   <Provider store={store}>
+//     <BrowserRouter>
+//       <App />
+//     </BrowserRouter>
+//   </Provider>
+// )
+import { render } from 'react-dom'
+
+const container = document.getElementById('root')
+render(
   <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </Provider>
+  </Provider>,
+  container
 )

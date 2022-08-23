@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
+    "@types/react": "^17.0.38",
     "@types/react-redux": "^7.1.24",
     "@types/react-slick": "^0.23.10",
     "@types/slick-carousel": "^1.6.37",
@@ -19,8 +20,8 @@
     "firebase": "^9.9.2",
     "flowbite": "^1.5.1",
     "flowbite-react": "^0.1.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-icons": "^4.4.0",
     "react-kakao-maps-sdk": "^1.1.1",
     "react-redux": "^8.0.2",
@@ -31,8 +32,6 @@
     "vite-tsconfig-paths": "^3.5.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.0",
     "autoprefixer": "^10.4.8",
     "kakao.maps.d.ts": "^0.1.32",
