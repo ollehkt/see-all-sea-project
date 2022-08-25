@@ -20,7 +20,7 @@ const Area = () => {
     setIsLoading(true)
     try {
       const res = await axios(
-        `/api/1192000/service/OceansBeachInfoService1/getOceansBeachInfo1?pageNo=1&numOfRows=100&resultType=JSON&SIDO_NM=${area}&ServiceKey=${API_KEY}`
+        `https://apis.data.go.kr/1192000/service/OceansBeachInfoService1/getOceansBeachInfo1?pageNo=1&numOfRows=100&resultType=JSON&SIDO_NM=${area}&ServiceKey=${API_KEY}`
       )
       const { item, totalCount } = res.data.getOceansBeachInfo
 
