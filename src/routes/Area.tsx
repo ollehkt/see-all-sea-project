@@ -58,7 +58,7 @@ const Area = () => {
 
   return (
     <div className="">
-      <div className="py-10 flex justify-center">
+      <div className="py-10 flex justify-center ">
         {isLoading ? (
           <div role="status">
             <svg

@@ -13,10 +13,10 @@ function TheHeader({ isLogged, init }: PropsType) {
     authService.signOut()
   }
   return (
-    <div className="w-full  h-[76px] mx-auto bg-transparent  ">
+    <div className="w-[1200px] h-[76px] sm:w-[200px] sm:h-[128px] mx-auto bg-transparent  ">
       <header className="absolute top-0 left-0 right-0 z-20">
         <nav className="mx-auto px-24 py-4">
-          <div className="md:flex justify-between items-center">
+          <div className=" flex justify-between items-center">
             <div className=" flex justify-between items-center flex-1">
               <Link to="/" className="">
                 <svg
