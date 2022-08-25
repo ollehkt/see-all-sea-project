@@ -14,8 +14,6 @@ const Area = () => {
 
   const seaDataRef = useRef<any>([])
 
-  // inputValue 바탕으로 state 날씨와 맵에 useLocation으로 넘겨주기
-
   const getSeaInfo = async () => {
     setIsLoading(true)
     try {

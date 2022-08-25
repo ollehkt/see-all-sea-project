@@ -23,7 +23,6 @@ function WaterInfo({ area, areaInfo }: PropsType) {
       filteredItemRef.current = res.data.getOceansBeachSeawaterInfo.item.filter(
         (el: any) => el.sta_nm === areaInfo.sta_nm
       )
-
       setItems(filteredItemRef.current)
     } catch (error) {
       console.log(error)

@@ -1,11 +1,9 @@
 import React from 'react'
 import { useStoreSelector } from 'store/store'
 import CurrentWeatherIcon from './CurrentWeatherIcon'
-import ExtraInfo from './ExtraInfo'
-import TempInfo from './TempInfo'
 
 function CurrentWeather() {
-  const { name, weahterState, temp } = useStoreSelector((state) => state.weather.weather.payload)
+  const { weahterState, temp } = useStoreSelector((state) => state.weather.weather.payload)
 
   return (
     <div className="flex items-center justify-center text-3xl m-auto">

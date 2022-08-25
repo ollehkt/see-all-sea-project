@@ -18,7 +18,6 @@ interface PropsType {
 
 function ReactKakaoMap({ seaDatas, area }: PropsType) {
   const [isOpen, setIsOpen] = useState(false)
-  const [map, setMap] = useState<any>()
   const [viewInfo, setViewInfo] = useState<any>({
     viewWeather: true,
     viewWaterInfo: false,
@@ -40,8 +39,6 @@ function ReactKakaoMap({ seaDatas, area }: PropsType) {
     if (map) map.setBounds(bounds)
   }, [seaDatas])
 
-  console.log(seaDatas)
-  console.log(areaInfo)
   return (
     <>
       <Map

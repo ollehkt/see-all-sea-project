@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   GoogleAuthProvider,
   GithubAuthProvider,
@@ -7,7 +7,6 @@ import {
   signInWithPopup,
 } from 'firebase/auth'
 import { authService } from 'firebase'
-import { Link } from 'react-router-dom'
 
 function Auth() {
   const [user, setUser] = useState({

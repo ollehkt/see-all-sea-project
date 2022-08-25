@@ -8,7 +8,6 @@ interface PropsType {
 }
 
 function TheHeader({ isLogged, init }: PropsType) {
-  // const navigate = useNavigate()
   const clickLogout = () => {
     authService.signOut()
   }

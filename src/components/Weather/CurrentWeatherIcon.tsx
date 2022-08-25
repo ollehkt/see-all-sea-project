@@ -13,7 +13,6 @@ interface PropsType {
   weatherState?: string
 }
 
-// "Clouds", "Haze"
 function CurrentWeatherIcon({ weatherState, ...props }: PropsType) {
   switch (weatherState) {
     case 'ThunderStorm':

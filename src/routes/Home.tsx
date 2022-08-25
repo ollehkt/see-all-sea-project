@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const area = ['강원', '경기', '충북', '충남', '경남', '경북', '전남', '전북', '제주']
 const Home = () => {
   return (
     <>

@@ -9,7 +9,7 @@ function TempInfo() {
     <div className="w-[100%] flex items-center text-[20px] font-bold justify-evenly">
       <div>체감 {feels_like}&deg;</div>
       <div>최저 {temp_min}&deg;</div>
-      <div>최고 {temp_min}&deg;</div>
+      <div>최고 {temp_max}&deg;</div>
     </div>
   )
 }
