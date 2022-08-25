@@ -29,7 +29,6 @@ function ReactKakaoMap({ seaDatas, area }: PropsType) {
 
   const bounds = useMemo(() => {
     const bounds = new kakao.maps.LatLngBounds()
-
     seaDatas.forEach((data: any) => {
       bounds.extend(new kakao.maps.LatLng(data.latlng.lat, data.latlng.lon))
     })

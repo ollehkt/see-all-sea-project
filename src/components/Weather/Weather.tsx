@@ -25,6 +25,7 @@ const WeatherPrac = ({ latlng }: PropsType) => {
     try {
       const getWeahterAPI = `https://api.openweathermap.org/data/2.5/weather?lat=${latlng.lat}&lon=${latlng.lon}&appid=${API_KEY}&units=metric`
       const res = await axios(`${getWeahterAPI}`)
+      console.log(res)
       const {
         name,
         coord: { lat, lon },
