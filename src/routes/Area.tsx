@@ -1,10 +1,21 @@
 import React, { useEffect, useState, useRef } from 'react'
 import ReactKakaoMap from 'components/map/ReactKakaoMap'
-import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useGetSeaInfoQuery } from 'store/sea/seaSlices'
+import { Item } from 'rc-menu'
 
 const API_KEY = import.meta.env.VITE_SEA_APP_KEY
+
+interface SeaData {
+  title: string
+  latlng: {
+    lat: number
+    lon: number
+  }
+  tel: string
+  gugun_nm: string
+  sta_nm: string
+}
 
 const Area = () => {
   const { area } = useParams()
@@ -12,8 +23,20 @@ const Area = () => {
   // const [isLoading, setIsLoading] = useState(false)
 
   // const seaDataRef = useRef<any>([])
-  const { data: seaDatas, isLoading, isError } = useGetSeaInfoQuery(area)
-  console.log(seaDatas)
+  const { data: getSeaDatas, isLoading, isError } = useGetSeaInfoQuery(area)
+
+  // const [seaDatas, setSeaDatas] = useState<any>([
+  //   {
+  //     title: '',
+  //     latlng: {
+  //       lat: 0,
+  //       lon: 0,
+  //     },
+  //     tel: '',
+  //     gugun_nm: '',
+  //     sta_nm: '',
+  //   },
+  // ])
   // const getSeaInfo = async () => {
   //   setIsLoading(true)
   //   try {
@@ -82,8 +105,8 @@ const Area = () => {
         )}
         {/* <Search setInputValue={setInputValue} noResult={noResult} isLoading={isLoading} /> */}
       </div>
-
-      <div>{isLoading && seaDatas && <ReactKakaoMap seaDatas={seaDatas} area={area} />}</div>
+      {isError && <div>Error</div>}
+      <div>{getSeaDatas && <ReactKakaoMap seaDatas={getSeaDatas} area={area} />}</div>
     </div>
   )
 }
