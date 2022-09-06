@@ -10,7 +10,6 @@ import { userActions } from 'store/userInfo/userSlice'
 function App() {
   const [init, setInit] = useState(false)
   const [isLogged, setIsLogged] = useState<any>(authService.currentUser)
-  const [userObj, setUserObj] = useState<any>(null)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   useEffect(() => {

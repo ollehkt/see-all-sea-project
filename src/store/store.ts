@@ -1,17 +1,23 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import { useSelector, useDispatch, TypedUseSelectorHook } from 'react-redux'
-import { seaReducer } from './sea/seaSlices'
+
 import { weatherReducer } from './weather/weatherSlice'
-import { waterInfoReducer } from './waterInfo/WaterInfoSlices'
+import { seaApi } from './sea/seaSlices'
 import { userReducer } from './userInfo/userSlice'
 
 export const store = configureStore({
   reducer: {
-    sea: seaReducer,
-    weather: weatherReducer,
-    waterInfo: waterInfoReducer,
+    [seaApi.reducerPath]: seaApi.reducer,
+    // [waterInfoApi.reducerPath]: waterInfoApi.Reducer,
+    weatherInfo: weatherReducer,
     userInfo: userReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat([
+      seaApi.middleware,
+      // weatherApi.middlerware,
+      // waterInfoApi.middlerware,
+    ]),
 })
 
 type RootState = ReturnType<typeof store.getState>

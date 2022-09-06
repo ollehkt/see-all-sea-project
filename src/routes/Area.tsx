@@ -2,57 +2,57 @@ import React, { useEffect, useState, useRef } from 'react'
 import ReactKakaoMap from 'components/map/ReactKakaoMap'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { useGetSeaInfoQuery } from 'store/sea/seaSlices'
 
 const API_KEY = import.meta.env.VITE_SEA_APP_KEY
 
 const Area = () => {
-  const [seaDatas, setSeaDatas] = useState<any>([])
-
   const { area } = useParams()
   const [noResult, setNoResult] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+  // const [isLoading, setIsLoading] = useState(false)
 
-  const seaDataRef = useRef<any>([])
+  // const seaDataRef = useRef<any>([])
+  const { data: seaDatas, isLoading, isError } = useGetSeaInfoQuery(area)
+  console.log(seaDatas)
+  // const getSeaInfo = async () => {
+  //   setIsLoading(true)
+  //   try {
+  //     const res = await axios(
+  //       `https://apis.data.go.kr/1192000/service/OceansBeachInfoService1/getOceansBeachInfo1?pageNo=1&numOfRows=100&resultType=JSON&SIDO_NM=${area}&ServiceKey=${API_KEY}`
+  //     )
+  //     const { item, totalCount } = res.data.getOceansBeachInfo
 
-  const getSeaInfo = async () => {
-    setIsLoading(true)
-    try {
-      const res = await axios(
-        `https://apis.data.go.kr/1192000/service/OceansBeachInfoService1/getOceansBeachInfo1?pageNo=1&numOfRows=100&resultType=JSON&SIDO_NM=${area}&ServiceKey=${API_KEY}`
-      )
-      const { item, totalCount } = res.data.getOceansBeachInfo
+  //     if (totalCount === 0) {
+  //       setNoResult((prev) => (prev = '찾으시는 결과가 없습니다'))
+  //       return
+  //     }
 
-      if (totalCount === 0) {
-        setNoResult((prev) => (prev = '찾으시는 결과가 없습니다'))
-        return
-      }
+  //     item.forEach((item: any) => {
+  //       seaDataRef.current = [
+  //         ...seaDataRef.current,
+  //         {
+  //           title: item.sta_nm,
+  //           latlng: { lat: item.lat, lon: item.lon },
+  //           tel: item.link_tel,
+  //           gugun_nm: item.gugun_nm,
+  //           sta_nm: item.sta_nm,
+  //         },
+  //       ]
+  //     })
+  //     setSeaDatas((prev: any) => (prev = seaDataRef.current))
+  //   } catch (err) {
+  //     console.log(err)
+  //   } finally {
+  //     setIsLoading(false)
+  //   }
+  // }
 
-      item.forEach((item: any) => {
-        seaDataRef.current = [
-          ...seaDataRef.current,
-          {
-            title: item.sta_nm,
-            latlng: { lat: item.lat, lon: item.lon },
-            tel: item.link_tel,
-            gugun_nm: item.gugun_nm,
-            sta_nm: item.sta_nm,
-          },
-        ]
-      })
-      setSeaDatas((prev: any) => (prev = seaDataRef.current))
-    } catch (err) {
-      console.log(err)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    setSeaDatas((prev: []) => (prev = []))
-    setNoResult((prev) => (prev = ''))
-    seaDataRef.current = []
-    getSeaInfo()
-  }, [area])
+  // useEffect(() => {
+  //   setSeaDatas((prev: []) => (prev = []))
+  //   setNoResult((prev) => (prev = ''))
+  //   seaDataRef.current = []
+  //   getSeaInfo()
+  // }, [area])
 
   return (
     <div className="">
@@ -83,9 +83,7 @@ const Area = () => {
         {/* <Search setInputValue={setInputValue} noResult={noResult} isLoading={isLoading} /> */}
       </div>
 
-      <div>
-        <ReactKakaoMap seaDatas={seaDatas} area={area} />
-      </div>
+      <div>{isLoading && seaDatas && <ReactKakaoMap seaDatas={seaDatas} area={area} />}</div>
     </div>
   )
 }

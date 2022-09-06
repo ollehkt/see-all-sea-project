@@ -1,13 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import WeatherPrac from 'components/Weather/Weather'
-import {
-  CustomOverlayMap,
-  Map,
-  MapMarker,
-  MapTypeControl,
-  MarkerClusterer,
-  ZoomControl,
-} from 'react-kakao-maps-sdk'
+import { Map, MapMarker, MapTypeControl, MarkerClusterer, ZoomControl } from 'react-kakao-maps-sdk'
 import WaterInfo from '../WaterInfo/ViewWaterInfo'
 import ViewBeachComments from '../BeachComment/ViewBeachComments'
 
@@ -15,8 +8,16 @@ interface PropsType {
   seaDatas: []
   area: string | undefined
 }
+interface SeaData {
+  latlng: {
+    lat: number
+    lon: number
+  }
+  title: string
+}
 
 function ReactKakaoMap({ seaDatas, area }: PropsType) {
+  console.log(seaDatas)
   const [isOpen, setIsOpen] = useState(false)
   const [viewInfo, setViewInfo] = useState<any>({
     viewWeather: true,
@@ -28,8 +29,8 @@ function ReactKakaoMap({ seaDatas, area }: PropsType) {
 
   const bounds = useMemo(() => {
     const bounds = new kakao.maps.LatLngBounds()
-    seaDatas.forEach((data: any) => {
-      bounds.extend(new kakao.maps.LatLng(data.latlng.lat, data.latlng.lon))
+    seaDatas.forEach((data: SeaData) => {
+      bounds.extend(new kakao.maps.LatLng(data?.latlng?.lat, data.latlng.lon))
     })
     return bounds
   }, [seaDatas])
@@ -51,7 +52,7 @@ function ReactKakaoMap({ seaDatas, area }: PropsType) {
           averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
           minLevel={10} // 클러스터 할 최소 지도 레벨
         >
-          {seaDatas.map((item: any, index) => (
+          {seaDatas.map((item: SeaData, index) => (
             <MapMarker
               key={`${item.title}-${index}`}
               position={{ lat: item.latlng.lat, lng: item.latlng.lon }}
