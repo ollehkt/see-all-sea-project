@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <div className=" h-[450px] container mx-auto px-6 md:px-12 relative z-10 flex items-center py-32 xl:py-40">
-        <div className="lg:w-3/5 xl:w-2/5 flex flex-col items-start relative z-10">
+        <div className="lg:w-3/5 xl:w-3/5 flex flex-col items-start relative z-10">
           <h1 className="font-bold text-6xl sm:text-6xl text-white leading-3 line">
             눈으로 보는 모든 바다
             <br />
