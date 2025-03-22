@@ -41,7 +41,7 @@ function App() {
     }
     console.log('webview', window.ReactNativeWebView)
 
-    window.addEventListener('message', (e) => alert(JSON.parse(e.data.latitude)))
+    window.addEventListener('message', (e) => alert(e))
 
     document.addEventListener('message', (e) => alert(e))
 
