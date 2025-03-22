@@ -55,7 +55,7 @@ function App() {
   }, [])
   return (
     <>
-      {tempState && <div className="text-red-500 z-[1000000] text-2xl">{tempState.data}</div>}
+      <div className="text-red-500 z-[1000000] text-2xl">{tempState}</div>
       <div className="bg-[url('/beautiful-tropical-empty-beach-sea-ocean-with-white-cloud-on-blue-sky-background_74190-13665.webp')] bg-no-repeat bg-cover">
         {/* <TheHeader isLogged={isLogged} init={init} />
         <Router /> */}
