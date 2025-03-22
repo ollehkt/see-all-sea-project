@@ -41,15 +41,9 @@ function App() {
     }
     console.log('webview', window.ReactNativeWebView)
 
-    window.addEventListener('message', (e) => {
-      alert(JSON.parse(e.data.latitude))
-      setTempState(JSON.parse(e.data))
-    })
+    window.addEventListener('message', (e) => alert(JSON.parse(e.data.latitude)))
 
-    document.addEventListener('message', (e) => {
-      alert(e)
-      setTempState(e)
-    })
+    document.addEventListener('message', (e) => alert(e))
 
     return () => {
       window.removeEventListener('message', (e) => console.log(e))
@@ -59,7 +53,7 @@ function App() {
   return (
     <>
       <div className="bg-[url('/beautiful-tropical-empty-beach-sea-ocean-with-white-cloud-on-blue-sky-background_74190-13665.webp')] bg-no-repeat bg-cover">
-        {tempState && <div className="text-red-500 z-[1000000] text-2xl">{tempState.data}</div>}
+        {/* {tempState && <div className="text-red-500 z-[1000000] text-2xl">{tempState.data}</div>} */}
         <TheHeader isLogged={isLogged} init={init} />
         <Router />
       </div>
