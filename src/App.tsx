@@ -37,10 +37,10 @@ function App() {
     if (window.ReactNativeWebView) {
       window.ReactNativeWebView.postMessage(JSON.stringify({ data: 'hello' }))
     }
-    console.log(window.ReactNativeWebView)
+    console.log('webview', window.ReactNativeWebView)
 
-    window.addEventListener('message', (e) => console.log(e))
-    document.addEventListener('message', (e) => console.log(e))
+    window.addEventListener('message', (e) => alert(e))
+    document.addEventListener('message', (e) => alert(e))
 
     return () => {
       window.removeEventListener('message', (e) => console.log(e))
