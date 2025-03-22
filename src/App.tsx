@@ -25,6 +25,19 @@ function App() {
       setInit(true)
     })
   }, [])
+
+  /** 수정된 부분 */
+  useEffect(() => {
+    window.ReactNativeWebview.postMessage('로그인 하기')
+
+    window.addEventListener('message', (e) => console.log(e))
+    document.addEventListener('message', (e) => console.log(e))
+
+    return () => {
+      window.removeEventListener('message', (e) => console.log(e))
+      document.removeEventListener('message', (e) => console.log(e))
+    }
+  }, [])
   return (
     <>
       <div className="bg-[url('/beautiful-tropical-empty-beach-sea-ocean-with-white-cloud-on-blue-sky-background_74190-13665.webp')] bg-no-repeat bg-cover">

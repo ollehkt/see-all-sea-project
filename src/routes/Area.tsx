@@ -60,20 +60,6 @@ const Area = () => {
     getSeaInfo()
   }, [area])
 
-
-  /** 수정된 부분 */
-  useEffect(() => {
-    window.ReactNativeWebview.postMessage('로그인 하기')
-
-    window.addEventListener('message', (e) => console.log(e))
-    document.addEventListener('message', (e) => console.log(e))
-
-    return () => {
-      window.removeEventListener('message', (e) => console.log(e))
-      document.removeEventListener('message', (e) => console.log(e))
-    }
-  }, [])
-
   return (
     <div className="">
       <div className="py-10 flex justify-center ">
