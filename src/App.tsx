@@ -41,8 +41,15 @@ function App() {
     }
     console.log('webview', window.ReactNativeWebView)
 
-    window.addEventListener('message', (e) => setTempState(JSON.parse(e.data)))
-    document.addEventListener('message', (e) => setTempState(e))
+    window.addEventListener('message', (e) => {
+      alert(JSON.parse(e.data.latitude))
+      setTempState(JSON.parse(e.data))
+    })
+
+    document.addEventListener('message', (e) => {
+      alert(e)
+      setTempState(e)
+    })
 
     return () => {
       window.removeEventListener('message', (e) => console.log(e))
