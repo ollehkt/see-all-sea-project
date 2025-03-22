@@ -3,6 +3,12 @@ import ReactKakaoMap from 'components/map/ReactKakaoMap'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
+declare global {
+  interface Window {
+    ReactNativeWebview: any
+  }
+}
+
 const API_KEY = import.meta.env.VITE_SEA_APP_KEY
 
 const Area = () => {
@@ -53,6 +59,20 @@ const Area = () => {
     seaDataRef.current = []
     getSeaInfo()
   }, [area])
+
+
+  /** 수정된 부분 */
+  useEffect(() => {
+    window.ReactNativeWebview.postMessage('로그인 하기')
+
+    window.addEventListener('message', (e) => console.log(e))
+    document.addEventListener('message', (e) => console.log(e))
+
+    return () => {
+      window.removeEventListener('message', (e) => console.log(e))
+      document.removeEventListener('message', (e) => console.log(e))
+    }
+  }, [])
 
   return (
     <div className="">
