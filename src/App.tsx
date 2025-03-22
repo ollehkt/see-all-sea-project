@@ -39,7 +39,7 @@ function App() {
     }
     console.log('webview', window.ReactNativeWebView)
 
-    window.addEventListener('message', (e) => alert(e))
+    window.addEventListener('message', (e) => alert(JSON.parse(e.data)))
     document.addEventListener('message', (e) => alert(e))
 
     return () => {
