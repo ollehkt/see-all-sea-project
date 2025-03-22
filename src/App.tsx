@@ -7,6 +7,12 @@ import { authService } from 'firebase'
 import { useAppDispatch } from 'store/store'
 import { userActions } from 'store/userInfo/userSlice'
 
+declare global {
+  interface Window {
+    ReactNativeWebView: any
+  }
+}
+
 function App() {
   const [init, setInit] = useState(false)
   const [isLogged, setIsLogged] = useState<any>(authService.currentUser)
@@ -28,7 +34,10 @@ function App() {
 
   /** 수정된 부분 */
   useEffect(() => {
-    window.ReactNativeWebview.postMessage('로그인 하기')
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(JSON.stringify({ data: 'hello' }))
+    }
+    console.log(window.ReactNativeWebView)
 
     window.addEventListener('message', (e) => console.log(e))
     document.addEventListener('message', (e) => console.log(e))

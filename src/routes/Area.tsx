@@ -3,12 +3,6 @@ import ReactKakaoMap from 'components/map/ReactKakaoMap'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
-declare global {
-  interface Window {
-    ReactNativeWebview: any
-  }
-}
-
 const API_KEY = import.meta.env.VITE_SEA_APP_KEY
 
 const Area = () => {
