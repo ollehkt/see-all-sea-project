@@ -32,6 +32,8 @@ function App() {
     })
   }, [])
 
+  const [tempState, setTempState] = useState<any>(null)
+
   /** 수정된 부분 */
   useEffect(() => {
     if (window.ReactNativeWebView) {
@@ -39,8 +41,8 @@ function App() {
     }
     console.log('webview', window.ReactNativeWebView)
 
-    window.addEventListener('message', (e) => alert(JSON.parse(e.data)))
-    document.addEventListener('message', (e) => alert(e))
+    window.addEventListener('message', (e) => setTempState(JSON.parse(e.data)))
+    document.addEventListener('message', (e) => setTempState(e))
 
     return () => {
       window.removeEventListener('message', (e) => console.log(e))
@@ -52,6 +54,7 @@ function App() {
       <div className="bg-[url('/beautiful-tropical-empty-beach-sea-ocean-with-white-cloud-on-blue-sky-background_74190-13665.webp')] bg-no-repeat bg-cover">
         <TheHeader isLogged={isLogged} init={init} />
         <Router />
+        {tempState && <div>{tempState.data}</div>}
       </div>
       <TheFooter />
     </>
