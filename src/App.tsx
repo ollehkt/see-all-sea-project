@@ -1,17 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Router from 'routes/Router'
 import TheHeader from 'components/TheHeader'
 import TheFooter from 'components/TheFooter'
 import { authService } from 'firebase'
 import { useAppDispatch } from 'store/store'
 import { userActions } from 'store/userInfo/userSlice'
-
-declare global {
-  interface Window {
-    ReactNativeWebView: any
-  }
-}
 
 function App() {
   const [init, setInit] = useState(false)
@@ -32,35 +26,13 @@ function App() {
     })
   }, [])
 
-  const [tempState, setTempState] = useState<any>(null)
-
-  /** 수정된 부분 */
-  useEffect(() => {
-    if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage(JSON.stringify({ data: 'hello' }))
-    }
-    console.log('webview', window.ReactNativeWebView)
-
-    window.addEventListener('message', (e) => {
-      setTempState(JSON.parse(e.data))
-      alert(e)
-    })
-
-    document.addEventListener('message', (e) => alert(e))
-
-    return () => {
-      window.removeEventListener('message', (e) => console.log(e))
-      document.removeEventListener('message', (e) => console.log(e))
-    }
-  }, [])
   return (
     <>
-      <div className="text-red-500 z-[1000000] text-2xl">{tempState}</div>
       <div className="bg-[url('/beautiful-tropical-empty-beach-sea-ocean-with-white-cloud-on-blue-sky-background_74190-13665.webp')] bg-no-repeat bg-cover">
-        {/* <TheHeader isLogged={isLogged} init={init} />
-        <Router /> */}
+        <TheHeader isLogged={isLogged} init={init} />
+        <Router />
       </div>
-      {/* <TheFooter /> */}
+      <TheFooter />
     </>
   )
 }
